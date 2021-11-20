@@ -1,5 +1,6 @@
 (function(){ 
     self.Board = function(width, height){
+        //Objeto tablero, permite dibujar el fondo
         this.width = width;
         this.height = height;
         this.playing = false;
@@ -8,6 +9,7 @@
         this.ball = null;
       }
     self.Board.prototype = {
+        //Retorna contenido del tablero
       get elements(){
         var elements = this.bars.map(function(bar){return bar;});
         elements.push(this.ball);
@@ -17,6 +19,7 @@
   })();
   
   (function(){
+      //Dibuja y describe comportamiento de la bola
     self.Ball = function(x,y,radius,board){
       this.x =x;
       this.y=y;
@@ -46,6 +49,7 @@
         },
 
         collision: function(bar){
+            //Funcion que determina el comportamiento de la bola al colisionar
             var relative_intersect_y = ( bar.y + (bar.height / 2) ) - this.y;
 
 			var normalized_intersect_y = relative_intersect_y / (bar.height / 2);
@@ -62,6 +66,7 @@
   })();
   
   (function(){
+      //Declaracion objeto barra
     self.Bar = function(x,y,width,height,board){
       this.x = x;
       this.y = y;
@@ -110,6 +115,7 @@
         },
 
         check_collisions: function(){
+            //Check de colision con objetos
             for (var i = this.board.bars.length - 1; i >= 0; i--){
                 var bar = this.board.bars[i];
                 if(hit(bar, this.board.ball)){
@@ -119,6 +125,7 @@
         },
 
         play: function(){
+            //Inicializa las posiciones y velocidades de los objetos
             if(this.board.playing){
                 this.clean();
                 this.draw();
